@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redux Recipes</title>
+</head>
+<body>
+    <script src="./redux.min.js"></script>
+    <script>
+     // state should be imutable not mutable
+    // let state =[];
+     //reducer
+     let reducer = (state= [] , action) => {
+         // ... called spread operator
+        if(action.type === 'NEW_ORDER'){
+            let newState= [...state , action.payload];
+            //console.log(newState);
+            return newState;
+        }
+         return state;
+     }
+     //action
+     let action = {type: 'NEW_ORDER', payload: 'coffee'};
+
+     /*console.log(reducer(state,action));
+     console.log(reducer(state,action));
+     o.p -> coffee 
+     coffee
+     */
+
+    /*let resultState = reducer(state,action);
+    console.log(resultState);
+    console.log(reducer(resultState,action));
+     o.p
+     coffee
+     coffee, coffee
+    */
+   let store = Redux.createStore(reducer);
+   store.dispatch(action);
+   store.dispatch(action);
+   store.dispatch(action);
+
+   // restore state from store
+     console.log(store.getState());
+    </script>
+</body>
+</html>

@@ -21,9 +21,9 @@
         }
          return state;
      }
-     //action
+     /*action
      let action = {type: 'NEW_ORDER', payload: 'coffee'};
-
+     */
      /*console.log(reducer(state,action));
      console.log(reducer(state,action));
      o.p -> coffee 
@@ -38,11 +38,17 @@
      coffee, coffee
     */
    let store = Redux.createStore(reducer);
-   store.dispatch(action);
-   store.dispatch(action);
-   store.dispatch(action);
+   store.dispatch({type: 'NEW_ORDER', payload:{ id: 1, order: 'coffee', amount: 1}});
+   store.dispatch({type: 'NEW_ORDER', payload:{ id: 2, order: 'cake', amount: 1}});
+   store.dispatch({type: 'NEW_ORDER', payload:{ id: 3, order: 'sandwitch', amount: 1}});
 
-   // restore state from store
+   // 1.5 restore state from store
+     console.log(store.getState());
+
+    // 1.6 firing different actions
+     store.dispatch({type: 'CHANGE_AMOUNT', payload:{id: 2, amount:3}});
+     console.log(store.getState());
+     store.dispatch({type: 'DELETE_ORDER' , payload:{id: 1}});
      console.log(store.getState());
     </script>
 </body>

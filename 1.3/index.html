@@ -14,12 +14,50 @@
      //reducer
      let reducer = (state= [] , action) => {
          // ... called spread operator
+         switch(action.type){
+            case 'NEW_ORDER':{
+                let newState= [...state , action.payload];
+                return newState;
+            }
+            case 'CHANGE_AMOUNT':{
+                let {id, amount}= action.payload;
+                let newState= [...state];
+                newState.map((item)=>{
+                    if(item.id == id){
+                        item.amount= amount;
+                    }
+                });
+                return newState
+            }
+            case 'DELETE_ORDER':{
+                let {id} = action.payload;
+                let newState= [...state];
+                return newState.filter((item)=> item.id != id);
+            }
+            default: 
+                return state;
+         }
+       /* we can change if with switch case
         if(action.type === 'NEW_ORDER'){
             let newState= [...state , action.payload];
             //console.log(newState);
             return newState;
+        }else if(action.type === 'CHANGE_AMOUNT'){
+            let {id, amount} = action.payload;
+            let newState= [...state];
+            newState.map((item)=>{
+                if(item.id == id){
+                    item.amount = amount;
+                }
+            });
+            return newState
+        }else if(action.type === 'DELETE_ORDER'){
+            let {id} = action.payload;
+            newState= [...state];
+            return newState.filter((item)=> item.id != id) ;
         }
          return state;
+        */
      }
      /*action
      let action = {type: 'NEW_ORDER', payload: 'coffee'};
@@ -50,6 +88,8 @@
      console.log(store.getState());
      store.dispatch({type: 'DELETE_ORDER' , payload:{id: 1}});
      console.log(store.getState());
+    // 1.7 handling different actions in reducers
+    
     </script>
 </body>
 </html>
